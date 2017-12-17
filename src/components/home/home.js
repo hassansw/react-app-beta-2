@@ -10,7 +10,7 @@ class HomePage extends Component {
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam deserunt
           accusamus iste veniam libero ut, qui eos cumque laudantium rem excepturi atque
           et exercitationem quisquam incidunt dolorem nulla, officiis at?</p>
-        {/* <Link to="/about" className="btn btn-primary">About</Link> */}
+        {/*<Link to="/about" className="btn btn-primary">About</Link>*/}
         <button className="btn btn-primary">More Info</button>
       </div>
     )
