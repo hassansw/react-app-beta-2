@@ -1,34 +1,41 @@
-import React, {Component} from "react";
+import React, {Component, ReactPropTypes} from "react";
 //import {Link} from "react-router-dom";
 import {ToastContainer, toast} from "react-toastify";
 import {connect} from 'react-redux'
 import * as courseAction from '../../actions/courseAction'
+import {bindActionCreators} from 'redux'
 
 class CoursePage extends Component {
     constructor(props, context) {
         super(props, context)
+        
+        //State Literally is the place to declare, hold varaibles in the Component
         this.state = {
             cousre : {title : ""}
         }
 
+        //This is the most effect and a proper way of binding functions to onClic kEvents
         this.onAddClick = this.onAddClick.bind(this)
         this.onTitleChange = this.onTitleChange.bind(this)
     }
 
 
+    //A Text Change Listener
     onTitleChange(event) {
         const course = this.state.cousre
         course.title = event.target.value
+        //setState is used to overwrite and manipulate vairables 
         this.setState({course : course})
     }
     
     onAddClick() {
-        this.props.dispatch(courseAction.createCourse(this.state.cousre))
-        console.log('hell')
-        toast(`Saving ${this.state.cousre.title}` , {autoClose: 15000})
+        //This will be present in the mapDispatchToProps
+        this.props.actions.createCourse(this.state.cousre)
+        //toast(`Saving ${this.state.cousre.title}` , {autoClose: 15000})
     }
 
     courseRow(course, index) {
+        //This just like an adapter, dynamically adds rows with data
         return <p key={index}>{course.title}</p>
     }
 
@@ -36,7 +43,6 @@ class CoursePage extends Component {
         return(
             <div className="row jumbotron">
                 <h1>Course Section</h1>
-                <div>{this.props.courses.map(this.courseRow)}</div>
                 <div className="row">
                     <h2>Add Course</h2>
                     <div className="input-group">
@@ -46,13 +52,13 @@ class CoursePage extends Component {
                         </span>
                     </div>
                 </div>
+                <div><h2>Course List:</h2></div>
+                <div>{this.props.courses.map(this.courseRow)}</div>
+
                 <ToastContainer autoClose={8000} />
             </div>
         )
     }
-
-
-
 }
 
 function mapStateToProps(state, ownProps) {
@@ -61,5 +67,13 @@ function mapStateToProps(state, ownProps) {
     }
 }
 
+function mapDispatchToProps(dispatch) {
+    return {
+        // createCourse: course => dispatch(courseAction.createCourse(course))
+        actions : bindActionCreators(courseAction, dispatch)
+    }
+}
 
-export default connect(mapStateToProps)(CoursePage)
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(CoursePage)
