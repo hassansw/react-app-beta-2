@@ -1,8 +1,9 @@
-import React, { Component } from "react";
-import PropTypes from 'prop-types';
+import React, {Component} from 'react';
 import logo from "./logo.svg";
+import AboutPage from './components/about/about'
+import CoursePage from './components/course/course'
 import "./App.css";
-import $ from 'jquery'
+
 // import {Bootstrap} from 'bootstrap'
 
 class App extends Component {
@@ -16,16 +17,14 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <div>
-          {this.props.children}
+        <div className="container container-fluid ">
+          <CoursePage/>
+          <AboutPage/>
         </div>
       </div>
     );
   }
 }
 
-App.propTypes = {
-  children : PropTypes.object.isRequired
-};
 
 export default App;

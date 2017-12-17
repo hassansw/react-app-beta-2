@@ -7,15 +7,21 @@ import HomePage from "./components/home/home";
 import AboutPage from "./components/about/about";
 import registerServiceWorker from './registerServiceWorker';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import configureStore from './store/configureStore'
+import {Provider} from 'react-redux'
+const store = configureStore()
 
 
 ReactDOM.render((
-    <HashRouter>
-        <div>
-            <Route exact path='/' component={App} />
-            <Route path='/about' component={AboutPage} />
-            <Route path='/home' component={HomePage} />
-        </div>
-    </HashRouter >
+    <Provider store={store}>
+        <HashRouter>
+            <div>
+                <Route exact path='/' component={App} />
+                <Route path='/about' component={AboutPage} />
+                <Route path='/home' component={HomePage} />
+            </div>
+        </HashRouter>
+    </Provider>
+    
 ), document.getElementById('root'))
 registerServiceWorker();
