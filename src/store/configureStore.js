@@ -1,10 +1,13 @@
-import {createStore/* , applyMiddleware */ } from 'redux'
+import {createStore, applyMiddleware } from 'redux'
 import rootReducer from '../reducers'
-import {} from 'redux'
+import thunk from 'redux-thunk'
+
+let middleware = applyMiddleware(thunk)
+
 
 export default function configureStore(initialSate) {
     return createStore(
-        rootReducer, 
-        initialSate
+        rootReducer,
+        initialSate, middleware
     )
 }

@@ -8,8 +8,12 @@ import AboutPage from "./components/about/about";
 import registerServiceWorker from './registerServiceWorker';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import configureStore from './store/configureStore'
+import {loadMovies} from './actions/getMoviesAction'
 import {Provider} from 'react-redux'
+
+
 const store = configureStore()
+store.dispatch(loadMovies)
 
 
 ReactDOM.render((

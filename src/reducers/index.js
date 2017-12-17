@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux'
 import courses from './courseReducer'
+import movies from './getMoviesReducer'
 
 const rootReducer = combineReducers({
-    courses
+    courses,
+    movies
 })
 
 export default rootReducer;
