@@ -53,7 +53,6 @@ class CoursePage extends Component {
                     </div>
                 </div>
                 <div><h2>Course List:</h2></div>
-                <div>{this.props.courses.map(this.courseRow)}</div>
 
                 <ToastContainer autoClose={8000} />
             </div>

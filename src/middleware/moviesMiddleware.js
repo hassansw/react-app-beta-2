@@ -1,13 +1,20 @@
-import axios from 'axios'
+import MovieAction from "../actions/getMoviesAction"
+import axios from "axios"
 
-export default function getMoviesAPI() {
-    //Uses Axios here
-    axios
-        .get('https://facebook.github.io/react-native/movies.json')
-        .then(responseJson => {
-            return responseJson
-        })
-        .catch(error => {
-            throw error
-        });
+class MovieMidware {
+
+    static getMovie() {
+        return (dispatch) => {
+            axios
+                .get("https://facebook.github.io/react-native/movies.json")
+                .then((responce) => {
+                    //console.log(responce.data)
+                    dispatch(MovieAction.MoviAction(responce.data))
+                })
+
+        }
+    }
+
 }
+
+export default MovieMidware

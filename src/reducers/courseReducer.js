@@ -1,12 +1,15 @@
 import * as ACTION_TYPES from '../actions/actionTypes'
 
-export default function courseReducer(state = [], action){
+const initialState = {
+    course : false
+}
+
+export default function courseReducer(state = initialState, action){
     switch (action.type) {
         
         case ACTION_TYPES.CREATE_COURSE:
-            return [...state,
-                Object.assign({}, action.course)
-            ]
+            return Object.assign({}, state, {action : action.course})
+
         
         default:
             return state

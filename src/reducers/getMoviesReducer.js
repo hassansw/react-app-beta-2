@@ -1,12 +1,23 @@
-import * as ACTION_TYPES from '../actions/actionTypes'
+import MovieAction from "../actions/getMoviesAction"
 
-export default function courseReducer(state = [], action) {
+const initialState = {
+    getMovie: false,
+    movieData: []
+}
+
+function MovieReducer(state = initialState, action) {
     switch (action.type) {
-        
-        case ACTION_TYPES.LOAD_MOVIES_SUCCESS:
-            return action.movies
+
+        case MovieAction.movieAct:
+            return Object.assign({}, state, {
+                getMovie: true,
+                movieData: action.data
+            })
 
         default:
             return state
+
     }
 }
+
+export default MovieReducer
