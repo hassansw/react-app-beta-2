@@ -3,7 +3,6 @@ import {ToastContainer, toast} from "react-toastify";
 import {connect} from 'react-redux'
 import * as moviesAction from '../../actions/getMoviesAction'
 import MovieMidware from '../../middleware/moviesMiddleware'
-import { element } from "./C:/Users/moeed/AppData/Local/Microsoft/TypeScript/2.6/node_modules/@types/prop-types";
 
 class MoviesPage extends Component {
 
@@ -11,16 +10,15 @@ class MoviesPage extends Component {
         super(props, context)
         this.state = {
             movies: '',
-            MovieArray : []
+            MovieArray : [],
+            movieMain : '',
+            dxdData : 'First'
         }
+
+        this.getMovie = this.getMovie.bind(this)
     }
 
-    movieRow(movie) {
-        //This just like an adapter, dynamically adds rows with data
-        return <p>Title:{movie.title}
-            and Release Year: {movie.releaseYear}</p>
-    }
-
+   
     getMovie = () => {
         //console.log('hell: ',this.props)
         this.props.getData()
@@ -41,8 +39,16 @@ class MoviesPage extends Component {
     componentWillReceiveProps(prop){
         console.log(prop.PageProps.movieData.movies)
         this.setState({MovieArray : prop.PageProps.movieData.movies})
+        this.setState({movieMain : prop.PageProps.movieData})
+        this.setState({dxdData : 'Hell'})
        
     }
+
+     movieRow(movie){
+        //This just like an adapter, dynamically adds rows with data
+        return (<p>Title:{movie.title} and Release Year: {movie.releaseYear}</p>)
+    }
+
 
     render() {
         return (
@@ -51,10 +57,8 @@ class MoviesPage extends Component {
                 <div className="row">
                     <button className="btn btn-primary" onClick={this.getMovie}>Get Movies</button>
                     <h2>Movies List:</h2>
-                     <div>{
-                         this.state.MovieArray.forEach((element)=>{
-                             this.movieRow(element)
-                         })}</div>
+                    <p>{this.dxdData}</p>
+                     <div>{this.state.MovieArray[0]}</div>
                 </div>  
             </div>
         )
@@ -66,11 +70,11 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch){
-return {
-    getData : ()=>{
-        dispatch(MovieMidware.getMovie())
+    return {
+        getData : ()=> {
+            dispatch(MovieMidware.getMovie())
+        }
     }
-}
 }
 
 
